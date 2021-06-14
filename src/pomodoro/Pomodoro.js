@@ -55,9 +55,9 @@ function Pomodoro() {
   //Stop button event handler
   //Resets the initial values and sets isTimerRunning back to false
   const stopSession = () => {
-    setSessionStates({
+    setSessionStates((sessionStates) => ({
       ...initialSessionState,
-    });
+    }));
     setIsTimerRunning(false);
   };
 
