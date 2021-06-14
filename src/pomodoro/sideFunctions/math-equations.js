@@ -5,9 +5,9 @@ import activeSessionCheck from "./active-session-check";
 export const checkMax = (value, num, max) => {
   // Check if focus is being adjusted
   if (value === "focusTimer") {
-    // If the timer is not maxed out, return 1 minute (60 seconds)
+    // If the timer is not maxed out, return 5 minute (300 seconds)
     if (num < max) {
-      return 60;
+      return 300;
     } else {
       // If the timer is maxed out, return 0
       return 0;
@@ -15,7 +15,7 @@ export const checkMax = (value, num, max) => {
   } else {
     // If break timer is being adjusted
     if (num < max) {
-      return 30;
+      return 60;
     } else {
       return 0;
     }
@@ -26,9 +26,9 @@ export const checkMax = (value, num, max) => {
 export const checkMin = (value, num, min) => {
   // Check if focus is being adjusted
   if (value === "focusTimer") {
-    // If the timer is not at it's minimum, return 1 minute (60 seconds)
+    // If the timer is not at it's minimum, return 5 minute (300 seconds)
     if (num > min) {
-      return 60;
+      return 300;
     } else {
       // If the timer is at it's minimum, return 0
       return 0;
@@ -36,7 +36,7 @@ export const checkMin = (value, num, min) => {
   } else {
     // If break timer is being adjusted
     if (num > min) {
-      return 30;
+      return 60;
     } else {
       return 0;
     }

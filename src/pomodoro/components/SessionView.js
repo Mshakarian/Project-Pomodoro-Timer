@@ -13,7 +13,7 @@ function SessionView({
   // Should only appear when isStopped is false
   return (
     !isStopped && (
-      <>
+      <div className="col">
         <h2 data-testid="session-title">
           {sessionStatus} for{" "}
           {checkHour(activeSessionCheck(sessionStatus, focusTimer, breakTimer))}{" "}
@@ -25,7 +25,7 @@ function SessionView({
           )}{" "}
           remaining
         </p>
-      </>
+      </div>
     )
   );
 }

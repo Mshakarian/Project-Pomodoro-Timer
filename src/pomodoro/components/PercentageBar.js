@@ -17,7 +17,7 @@ function PercentageBar({
 
   return (
     !isStopped && (
-      <>
+      <div className="col">
         <div className="progress" style={{ height: "20px" }}>
           <div
             className="progress-bar"
@@ -28,7 +28,7 @@ function PercentageBar({
             style={{ width: percComplete + "%" }} // TODO: Increase width % as elapsed time increases
           />
         </div>
-      </>
+      </div>
     )
   );
 }

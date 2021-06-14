@@ -25,7 +25,7 @@ function sessionRunning(
 
       sessionStatuses.elapsed = 0;
 
-      audio.play();
+      new Audio(audio).play();
 
       return sessionStatuses;
     }
@@ -43,7 +43,7 @@ function sessionRunning(
 
       sessionStatuses.elapsed = 0;
 
-      audio.play();
+      new Audio(audio).play();
 
       return sessionStatuses;
     }

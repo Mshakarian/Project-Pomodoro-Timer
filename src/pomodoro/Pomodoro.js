@@ -11,7 +11,8 @@ import {
   disableWhenStopped,
   disableWhenRunning,
 } from "./sideFunctions/button-disablers";
-import sound from "../sounds/mgsfound.mp3";
+
+const sound = `https://bigsoundbank.com/UPLOAD/mp3/1482.mp3`;
 
 function Pomodoro() {
   //Initial state object variable
@@ -26,7 +27,6 @@ function Pomodoro() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [sessionStates, setSessionStates] = useState(initialSessionState);
   //Audio element to be passed to session states function
-  const audioEl = document.getElementsByClassName("audio-element")[0];
 
   // ToDo: Allow the user to adjust the focus and break duration.
 
@@ -35,21 +35,21 @@ function Pomodoro() {
   //Increase the session timer
   //Will use checkMax to update the sessionState variable (focus/break) timer, depending on which was clicked
   const increaseSessionClick = (value, max) => {
-    setSessionStates({
+    setSessionStates((sessionStates) => ({
       ...sessionStates,
       [value]:
         sessionStates[value] + checkMax(value, sessionStates[value], max),
-    });
+    }));
   };
 
   //Decrease the session timmer
   //Will use checkMin to update the sessionState variable (focus/break) timer, depending on which was clicked
   const decreaseSessionClick = (value, min) => {
-    setSessionStates({
+    setSessionStates((sessionStates) => ({
       ...sessionStates,
       [value]:
         sessionStates[value] - checkMin(value, sessionStates[value], min),
-    });
+    }));
   };
 
   //Stop button event handler
@@ -70,12 +70,12 @@ function Pomodoro() {
     () => {
       // Function that updates elapsed, remaining, and session status
       // Will return object to update sessionStates state object
-      const updatedSessionStates = sessionRunning(sessionStates, audioEl);
+      const updatedSessionStates = sessionRunning(sessionStates, sound);
 
-      setSessionStates({
+      setSessionStates((sessionStates) => ({
         ...sessionStates,
         ...updatedSessionStates,
-      });
+      }));
       // Funciton that will check for the timer to run out and play the audio
     },
     isTimerRunning ? 1000 : null
@@ -87,10 +87,10 @@ function Pomodoro() {
   function playPause() {
     setIsTimerRunning((prevState) => !prevState);
     //Will ensure isStopped is false
-    setSessionStates({
+    setSessionStates((sessionStates) => ({
       ...sessionStates,
       isStopped: false,
-    });
+    }));
   }
 
   return (
@@ -152,10 +152,6 @@ function Pomodoro() {
                 >
                   <span className="oi oi-plus" />
                 </button>
-
-                <audio className="audio-element" preload="auto">
-                  <source src={sound}></source>
-                </audio>
               </div>
             </div>
           </div>
@@ -187,6 +183,7 @@ function Pomodoro() {
               type="button"
               className="btn btn-secondary"
               title="Stop the session"
+              data-testid="stop"
               onClick={stopSession}
               {...disableWhenStopped(sessionStates.isStopped)}
             >
